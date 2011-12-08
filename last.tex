@@ -1,0 +1,231 @@
+\documentclass[10pt,a4paper]{article}\usepackage[T1]{fontenc}\usepackage[utf8x]{inputenc}
+
+
+
+% Variablen
+	\newcommand{\expage}{3}
+	\newcommand{\expagedate}{24.11.2011}
+	\newcommand{\expageuntil}{19.12.2011}
+	\newcommand{\tutor}{}
+	\newcommand{\course}{Intrusion Detection and Malware Analysis}
+	\newcommand{\departmenturl}{http://www.ra.cs.uni-tuebingen.de/lehre/ws11/intrusion_det.html}
+	\newcommand{\departmentaddress}{WSI Tübingen}
+	\newcommand{\documentdate}{\today}
+	\newcommand{\documentauthor}{Matthias Müller}
+	\newcommand{\documenttitle}{Übungsblatt \expage}
+
+
+
+%-HIER-MUSS-NICHTS-MEHR-GEÄNDERT-WERDEN--------------------------------------%
+
+
+
+% Dokument Einstellungen
+	\usepackage[top=2.5cm,right=2.5cm,bottom=2.5cm,left=2.5cm]{geometry}
+	\usepackage[germanb]{babel}
+	\usepackage[babel,german=quotes]{csquotes}
+	\usepackage[override]{xcolor}
+	\usepackage{amsmath,amssymb,amstext,cite,color,enumerate,epstopdf,fleqn,
+		forloop,graphicx,hyperref,ifthen,lastpage,listings,longtable,lastpage,
+		lscape,makeidx,mathtools,multirow,paralist,rotating,setspace,subfigure,
+		tabularx,ucs,xspace,enumitem,boxedminipage,nicefrac,textcomp,pgffor,
+		blindtext,multicol}
+
+% Korrekturkopf
+	\newcommand*{\result}[1]{%
+		\newcounter{resultVarI}
+		\newcounter{resultVarEnd}
+		\setcounter{resultVarEnd}{#1}
+		\addtocounter{resultVarEnd}{1}
+		\renewcommand{\tabcolsep}{1.35em}
+		\renewcommand{\arraystretch}{1.55}
+	  \begin{tabular}{*{#1}{c|}|c||c}
+	  	\forloop{resultVarI}{1}{\value{resultVarI}<\value{resultVarEnd}}{%
+				\arabic{resultVarI}&
+			}\textbf{$\sum$}&\textbf{\%}\\\hline
+			\forloop{resultVarI}{1}{\value{resultVarI}<\value{resultVarEnd}}{%
+				\space&
+			}
+	  \end{tabular}
+	}
+
+% Farben
+	\newcommand*{\colorNames}{yellow,orange,pink,red,purple,violet,dodgerblue,blue,navy,yellowgreen,green,darkgreen}
+	\xdefinecolor{yellow}      {rgb}{1.00,0.85,0.00}
+	\xdefinecolor{blue}        {rgb}{0.15,0.40,0.85}
+	\xdefinecolor{navy}        {rgb}{0.00,0.00,0.45}
+	\xdefinecolor{dodgerblue}  {rgb}{0.00,0.55,1.00}
+	\xdefinecolor{darkgreen}   {rgb}{0.00,0.30,0.00}
+	\xdefinecolor{green}       {rgb}{0.00,0.50,0.00}
+	\xdefinecolor{yellowgreen} {rgb}{0.50,0.75,0.00}
+	\newcommand*{\helpColorTable}{%
+		\subsection*{Colors}%
+		\begin{center}
+		\renewcommand{\tabcolsep}{0.5ex}
+		\renewcommand{\arraystretch}{1.0}
+		\begin{tabular}{*{99}{l}}
+			\color{yellow}      \rule{1.5ex}{1.5ex} & \color{yellow}      yellow      &\hspace*{3ex}&
+			\color{red}         \rule{1.5ex}{1.5ex} & \color{red}         red         &\hspace*{3ex}&
+			\color{dodgerblue}  \rule{1.5ex}{1.5ex} & \color{dodgerblue}  dodgerblue  &\hspace*{3ex}&
+			\color{yellowgreen} \rule{1.5ex}{1.5ex} & \color{yellowgreen} yellowgreen &\hspace*{3ex}&
+			\color{lightgray}   \rule{1.5ex}{1.5ex} & \color{lightgray}   lightgray   &\hspace*{3ex}&
+			\color{white}       \rule{1.5ex}{1.5ex} & \color{white}       white (don't you see it?) \\
+			\color{orange}      \rule{1.5ex}{1.5ex} & \color{orange}      orange      &\hspace*{3ex}&
+			\color{purple}      \rule{1.5ex}{1.5ex} & \color{purple}      purple      &\hspace*{3ex}&
+			\color{blue}        \rule{1.5ex}{1.5ex} & \color{blue}        blue        &\hspace*{3ex}&
+			\color{green}       \rule{1.5ex}{1.5ex} & \color{green}       green       &\hspace*{3ex}&
+			\color{gray}        \rule{1.5ex}{1.5ex} & \color{gray}        gray        &\hspace*{3ex}&
+			\color{white}       \rule{1.5ex}{1.5ex} & \color{white}       white (use your glasses) \\
+			\color{pink}        \rule{1.5ex}{1.5ex} & \color{pink}        pink        &\hspace*{3ex}&
+			\color{violet}      \rule{1.5ex}{1.5ex} & \color{violet}      violet      &\hspace*{3ex}&
+			\color{navy}        \rule{1.5ex}{1.5ex} & \color{navy}        navy        &\hspace*{3ex}&
+			\color{darkgreen}   \rule{1.5ex}{1.5ex} & \color{darkgreen}   darkgreen   &\hspace*{3ex}&
+			\color{darkgray}    \rule{1.5ex}{1.5ex} & \color{darkgray}    darkgray    &\hspace*{3ex}&
+			\color{black}       \rule{1.5ex}{1.5ex} & \color{black}       black       \\
+		\end{tabular}
+		\end{center}
+	}
+
+% Manuals
+	\newcommand*{\helpManuals}{%
+		\subsection*{Manuals}
+		\begin{itemize}
+			\item TikZ and PGF:
+				\href{http://paws.wcu.edu/tsfoguel/tikzpgfmanual.pdf}
+							{Manual},
+				\href{http://www.texample.net/tikz/examples/}
+							{Examples}
+			\item Tables:
+				\href{http://www.andy-roberts.net/writing/latex/tables}
+							{Getting to Grips with \LaTeX{} -- Tables}
+			\item Symbols:
+				\href{ftp://ftp.dante.de/tex-archive/info/symbols/comprehensive/symbols-a4.pdf}
+							{The Comprehensive  \LaTeX{} Symbol List}
+			\item Tabus:
+				\href{ftp://ftp.dante.de/tex-archive/info/german/l2tabu/l2tabu.pdf}
+							{Das \LaTeX{$_{2\epsilon}$}-Sündenregister}
+		\end{itemize}
+	}
+
+% Custom Commands
+	\newcommand{\todo}{{\color{red}{\text{\mbox{\,\bf{ToDo}\,\xspace}}}}}
+	\newcommand{\answer}{\textbf{Antwort:\xspace}}
+	\newcommand{\eqdef}{\mathrel{\widehat{=}}}
+	\newcommand{\reldef}{\mathrel{\widetilde{=}}}
+	\newcommand{\mtrx}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+	\newcommand{\determ}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+	\newcommand{\sol}[1]{\underline{\underline{#1}}}
+	\newcommand{\points}[1]{\xspace{\scriptsize\mbox{(#1 Punkte)}}\xspace}
+	\newcommand*{\helpCustomcommands}{%
+		\subsection*{Custom Commands}
+		\begin{multicols}{2}
+		\begin{itemize}
+			\foreach \n in {todo,answer,eqdef,reldef,mtrx,determ,sol,points}{%
+				\item \texttt{\textbackslash{\n}}%
+			}
+		\end{itemize}
+		\end{multicols}
+	}
+
+% Hilfe
+	\newcommand*{\IREALLYNEEDHELPNOW}{%
+		%\bigskip\rule{\textwidth}{.5ex}
+		\newpage
+		\section*{Help}
+		\helpManuals
+		\helpColorTable
+		\helpCustomcommands
+	}
+
+% Hyperlinks
+	\hypersetup{
+		breaklinks=false, 
+		colorlinks=true, 
+		frenchlinks=true, 
+		linkcolor=black, 
+		urlcolor=dodgerblue, 
+		pagecolor=dodgerblue, 
+		citecolor=dodgerblue, 
+		filecolor=dodgerblue, 
+		menucolor=dodgerblue
+	}
+
+% Synttree
+	\usepackage{eurosym,synttree,stmaryrd}
+	\newcommand{\rt}[1]{{{
+		\tt
+		\renewcommand{\tabcolsep}{1ex}
+		\renewcommand{\arraystretch}{0.8}
+		#1
+	}}}
+
+% Kopf- und Fußzeile
+	\usepackage{fancyhdr,fancybox}
+	\pagestyle{fancy}
+	%
+	\fancyhead[L]{\textbf{\course: \documenttitle}}
+	\fancyhead[C]{}
+	\fancyhead[R]{{\textbf{\documentauthor}}}
+	%
+	\fancyfoot[L]{\footnotesize\textsf{\textsc{\textbf{LAST} (ain't an) Assignment Sheet Template} \textbullet{} \href{http://github.com/muellmat}{github.com/muellmat/last}}}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\footnotesize\textsf{\color{black}\thepage\,\slash{}\,\pageref{LastPage}}}
+	%
+	\renewcommand{\headrulewidth}{0.01ex}
+	\renewcommand{\footrulewidth}{0.01ex}
+
+
+
+%-HIER-KANN-WIEDER-GEÄNDERT-WERDEN-------------------------------------------%
+
+
+
+% Einzug in erster Zeile eines Absatzes
+	\usepackage[parfill]{parskip}
+	\frenchspacing
+
+% Serifenlose Schriftart
+	\renewcommand{\familydefault}{\sfdefault}
+
+% Zeilenabstand
+	\linespread{1.15}
+
+% Listings
+	\lstloadlanguages{Java,XML,HTML,C++,SQL}
+	\lstset{numbers=none,
+		tabsize=2,
+		inputencoding=utf8x,
+		extendedchars=\true,
+		basicstyle=\ttfamily\color{black}\scriptsize,
+		keywordstyle=\ttfamily\color{blue},
+		stringstyle=\ttfamily\color{green},
+		commentstyle=\ttfamily\color{gray}
+	}
+
+\title{\documenttitle}
+\author{\documentauthor}
+\date{\documentdate}
+\begin{document}
+
+
+
+%-INHALT---START-------------------------------------------------------------%
+
+
+
+\begin{flushright}~\\[-5ex]
+	\result{5}
+	\bigskip
+\end{flushright}
+
+
+
+\Blindtext
+
+
+
+\IREALLYNEEDHELPNOW
+
+%-INHALT---ENDE--------------------------------------------------------------%
+
+\end{document}
